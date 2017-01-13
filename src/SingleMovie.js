@@ -4,17 +4,8 @@ import './App.css';
 import $ from 'jquery'
 import Movie from './Movie'
 
-// class App extends React.Component{
-//   constructor(props) {
-//     super(props);
-//     this.state = {
-//       movie: []
-//     }
-//   }
-// }
 
-
-class App extends Component {
+class SingleMovie extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -24,7 +15,7 @@ class App extends Component {
   }  
 
   componentDidMount() {
-    var url = 'https://api.themoviedb.org/3/movie/now_playing?api_key=fec8b5ab27b292a68294261bb21b04a5'
+    var url = 'https://api.themoviedb.org/3/search/movie?api_key=fec8b5ab27b292a68294261bb21b04a5&query=' + this.props.params.movie
     $.getJSON(url, (nowPlayingData) =>{
       this.setState({
         movies: nowPlayingData.results
@@ -44,11 +35,11 @@ class App extends Component {
     return (
       <div className="App">
         <div>
-          {moviePosters}
+          {this.props.params.movie}
         </div>
       </div>
     );
   }
 }
 
-export default App;
+export default SingleMovie;
